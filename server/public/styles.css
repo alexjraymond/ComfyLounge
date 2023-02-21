@@ -1,0 +1,81 @@
+.logo-img {
+  width: 50px;
+}
+
+li > button > img {
+  width: 30px;
+  display: inline;
+}
+
+.nav-button {
+  width: 40px;
+  border-style: solid;
+  border-color: black;
+  border-width: 2px;
+  padding: 5px;
+  border-radius: 10px;
+}
+
+.nav-button:hover {
+  background-color: #fad0c966;
+}
+
+.nav-button:active {
+  background: #fee3de;
+  transform: translateY(4px);
+}
+
+.logo-div {
+  margin-top: -8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo-name {
+  margin-top: -8px;
+  font-size: 14px;
+}
+
+body {
+  /* background-image: url("./img/PastelHourDesktop.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed; */
+
+  /* background-color: #453f3c; */
+}
+
+.kitten-active {
+  background-color: #fad0c9;
+}
+
+.hidden {
+  display: none;
+}
+
+li {
+  margin: 0 5px;
+}
+
+.radio-div {
+  width: 400px;
+  height: 200px;
+  background-color: #fad0c9;
+  border-radius: 8px;
+}
+
+.music-widget {
+  padding: 15px;
+}
+
+.bg-img {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  object-fit: cover;
+  z-index: -1;
+}
