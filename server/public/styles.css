@@ -60,7 +60,7 @@ li {
 }
 
 .radio-div {
-  width: 400px;
+  width: 320px;
   height: 200px;
   background-color: #fad0c9;
   border-radius: 8px;
@@ -68,6 +68,8 @@ li {
 
 .music-widget {
   padding: 15px;
+  border-radius: 16px;
+  box-shadow: rgba(0, 0, 0, 0.247) 0 8px 24px;
 }
 
 .bg-img {
@@ -78,4 +80,12 @@ li {
   left: 0;
   object-fit: cover;
   z-index: -1;
+}
+
+/* .radio-form {
+  padding: 15px;
+} */
+
+label {
+  font-size: 1rem;
 }
