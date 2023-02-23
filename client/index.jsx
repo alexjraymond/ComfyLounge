@@ -10,5 +10,6 @@ root.render(
   <>
     <MusicWidget />
     <YoutubePlayer videoId="jfKfPfyJRdk" />
+    <div>test</div>
   </>
 );
