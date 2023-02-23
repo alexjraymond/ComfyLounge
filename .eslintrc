@@ -10,6 +10,10 @@
     "eslint:recommended",
     "standard"
   ],
+  "ignorePatterns": [
+    "!**/*",
+    "node_modules"
+  ],
   "settings": {
     "react": {
       "version": "detect"
@@ -18,7 +22,7 @@
   "rules": {
     "arrow-parens": [
       "error",
-      "as-needed"
+      "always"
     ],
     "curly": [
       "error",
