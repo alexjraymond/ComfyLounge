@@ -6,36 +6,43 @@ const YouTubePlayer = ({ videoId }) => {
   useEffect(() => {
     // Load the YouTube Player API script
 
+    const newPlayer = new window.YT.Player('player', {
+      height: '320',
+      width: '640',
+      videoId,
+      playerVars: {
+        autoplay: 1,
+        controls: 0,
+        modestbranding: 1,
+        playsinline: 1
+      },
+      events: {
+        onReady: onPlayerReady,
+        onStateChange: onPlayerStateChange
+      }
+    });
+
+    // newPlayer.playVideo();
+
     // Create a new YouTube.Player instance when the API script is loaded
-    window.onYouTubePlayerAPIReady = () => {
-      const newPlayer = new window.YT.Player('player', {
-        height: '320',
-        width: '640',
-        videoId,
-        playerVars: {
-          autoplay: 0,
-          controls: 0,
-          modestbranding: 1,
-          playsinline: 1
-        },
-        events: {
-          onReady: onPlayerReady,
-          onStateChange: onPlayerStateChange
-        }
-      });
+    setPlayer(newPlayer);
+    window.onYouTubeIframeAPIReady = () => {
       setPlayer(newPlayer);
     };
 
     // Clean up the player instance when the component unmounts
     return () => {
-      player.destroy();
+      // player.destroy();
+      if (player && typeof player.destroy === 'function') {
+        player.destroy();
+      }
       setPlayer(null);
     };
+
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [videoId]);
 
   const onPlayerReady = (event) => {
-    // console.log('player ready');
     event.target.playVideo();
   };
 
@@ -47,6 +54,7 @@ const YouTubePlayer = ({ videoId }) => {
 
   const onPlayerStateChange = (event) => {
     // Handle changes in player state here
+    onPlayerReady(event);
   };
 
   return (
