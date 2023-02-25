@@ -89,3 +89,9 @@ li {
 label {
   font-size: 1rem;
 }
+
+.play-pause {
+  width: 200px;
+  height: 80px;
+  border: solid;
+}

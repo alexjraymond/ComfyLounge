@@ -1,10 +1,12 @@
 import React, { useRef, useState } from 'react';
 // import YouTubePlayer from './YoutubePlayer';
-import Example from './YoutubePlay';
+import YoutubeFunctionality from './YoutubePlay';
 
 export default function MusicWidget() {
   const widgetRef = useRef(null);
-  const [videoId, setVideoId] = useState('jfKfPfyJRdk');
+  const [videoId, setVideoId] = useState('');
+  // const [volume, setVolume] = useState(50);
+
   // pass this into form and video and stuff as prop
 
   function widgetMovement(e) {
@@ -32,6 +34,14 @@ export default function MusicWidget() {
     setVideoId(newVideo);
   }
 
+  // function handleVolumeChange(newVolume) {
+  //   setVolume(newVolume);
+  // }
+
+  // function handlePlayChange(newPlay) {
+  //   setPlayPause(newPlay);
+  // }
+
   return (
     <div
       className="music-widget"
@@ -40,8 +50,10 @@ export default function MusicWidget() {
       onMouseDown={widgetMovement}
     >
       <YoutubeForm videoId={videoId} onVideoChange={handleVideoChange} />
+      {/* <VolumeSlider volume={volume} onVolumeChange={handleVolumeChange} /> */}
+      {/* <PlayButton playPause={playPause} onPlayChange={handlePlayChange} /> */}
       {/* <YouTubePlayer videoId={videoId} /> */}
-      <Example videoId={videoId} />
+      <YoutubeFunctionality videoId={videoId} />
     </div>
   );
 }
@@ -50,6 +62,7 @@ function YoutubeForm(props) {
   const { videoId, onVideoChange } = props;
 
   function inputVideoChange(e) {
+
     const newVideo = (e.target.value);
     onVideoChange(newVideo);
   }
@@ -77,16 +90,44 @@ function YoutubeForm(props) {
           </div>
         </form>
         <div className="audio-controls justify-end align-bottom">
-          <box-icon name='play-circle' />
-          <box-icon type='solid' name='volume-mute' />
-          <input type="range" id="volume" name="volume"
-          min="0" max="11" className='volume' />
-          <label htmlFor="volume" />
+          {/* <box-icon name='play-circle' />
+          <box-icon type='solid' name='volume-mute' /> */}
+
         </div>
       </div>
     </div >
   );
 }
+
+// function VolumeSlider(props) {
+//   const { volume, onVolumeChange } = props;
+
+//   const handleVolumeChange = (e) => {
+//     e.preventDefault();
+//     const newVolume = (e.target.value);
+//     onVolumeChange(newVolume);
+//   };
+
+//   return (
+//     <>
+//       <input type="range" id="volume" name="volume"
+//         min="0" max="100" className='volume' value={0} onChange={handleVolumeChange} />
+//       <label htmlFor="volume" />
+//     </>
+//   );
+// }
+
+// function PlayButton(props) {
+//   const { play, onPlayChange } = props;
+
+//   const inputPlayChange = (e) => {
+//     const newPlay = (!play);
+//     onPlayChange(newPlay);
+//     console.log(newPlay);
+//   };
+
+//   return <box-icon name='play-circle' value={false} onClick={inputPlayChange} />;
+// }
 
 // youtubeform job is to put controls up and to tell youtubeplayer/parent what new id is
 // youtube form needs to tell someone stuff
