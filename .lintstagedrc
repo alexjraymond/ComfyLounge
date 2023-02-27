@@ -3,7 +3,7 @@
     "markuplint"
   ],
   "*.css": [
-    "stylelint --fix"
+    "stylelint --fix --allow-empty-input"
   ],
   "*.{js,jsx}": [
     "eslint --fix"

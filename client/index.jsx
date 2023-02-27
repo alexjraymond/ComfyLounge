@@ -1,8 +1,11 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './app';
+import reactDOM from 'react-dom/client';
+import MusicWidget from './components/MusicWidget';
 
 const container = document.querySelector('#root');
-const root = ReactDOM.createRoot(container);
+const root = reactDOM.createRoot(container);
 
-root.render(<App />);
+root.render(
+  <MusicWidget />
+
+);
