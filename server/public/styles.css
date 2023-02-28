@@ -22,7 +22,8 @@ li > button > img {
 
 .nav-button:active {
   background: #fee3de;
-  transform: translateY(4px);
+
+  /* transform: translateY(4px); */
 }
 
 .logo-div {

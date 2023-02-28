@@ -1,8 +1,7 @@
 import React, { useRef, useState } from 'react';
-// import YouTubePlayer from './YoutubePlayer';
 import YoutubeFunctionality from './YoutubePlay';
 
-export default function MusicWidget() {
+export default function MusicWidget(props) {
   const widgetRef = useRef(null);
   const [videoId, setVideoId] = useState('');
 
