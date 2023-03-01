@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import YoutubeFunctionality from './YoutubePlay';
 
+// Music Widget - holds the form and takes in YoutubePlay component
 export default function MusicWidget() {
   const widgetRef = useRef(null);
   const [videoId, setVideoId] = useState('');

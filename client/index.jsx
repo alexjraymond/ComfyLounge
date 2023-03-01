@@ -19,18 +19,37 @@ function App() {
   };
 
   const addStickyNote = () => {
-    const newStickyNote = <StickyNotes id={uuidv4()} key={uuidv4()} removeStickyNote={removeStickyNote} />;
+    // const newId = Date.now().toString();
+    const noteId = uuidv4();
+    const newStickyNote = { id: noteId, text: '' };
     setStickyList([...stickyList, newStickyNote]);
+
+    // ;
+
+    // for button coloring
     setIsStickyActive(true);
+    // localStorage.setItem('stickyNotes', JSON.stringify([...stickyList, newId]));
   };
 
   const removeStickyNote = (id) => {
-    const updatedStickyList = stickyList.filter((note) => note.props.id !== id);
+
+    const updatedStickyList = stickyList.filter((note) => note.id !== id);
+
     setStickyList(updatedStickyList);
+    // for button color
     if (updatedStickyList.length === 0) {
       setIsStickyActive(false);
     }
+    // localStorage.setItem(updatedStickyList);
+    // localStorage.removeItem(`text-${id}`);
   };
+
+  // useEffect(() => {
+  //   const storedNotes = JSON.parse(localStorage.getItem('stickyNotes'));
+  //   if (storedNotes) {
+  //     setStickyList(storedNotes);
+  //   }
+  // }, []);
 
   return (
     <>
@@ -43,7 +62,7 @@ function App() {
       />
       <main>
         {isMusicWidgetVisible ? <MusicWidget /> : null }
-        {stickyList}
+        {stickyList.map((note) => (<StickyNotes note={note} key={note.id} removeStickyNote={removeStickyNote} />))}
       </main>
     </>
   );

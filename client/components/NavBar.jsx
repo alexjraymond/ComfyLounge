@@ -2,6 +2,7 @@ import React from 'react';
 import radioButton from '../../server/public/img/radbut1.png';
 import notesButton from '../../server/public/img/notesbutton.png';
 
+// entire Navigation Bar functionality
 export default function NavBar(props) {
   const { hideMusicWidget, onNotesButtonClick, stickyList, isStickyActive, isMusicWidgetVisible } = props;
 

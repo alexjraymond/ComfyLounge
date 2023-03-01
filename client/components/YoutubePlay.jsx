@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import YouTube from 'react-youtube';
 
+// Playing Youtube in the background for the Music Widget - Also adjusts volume and mute
 export default function YoutubeFunctionality({ videoId }) {
   const [isPlaying, setIsPlaying] = useState(false);
   const playerRef = useRef(null);
