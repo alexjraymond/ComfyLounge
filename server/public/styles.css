@@ -136,3 +136,33 @@ textarea:focus {
 .notes-article {
   height: 100%;
 }
+
+.sticky-count {
+  position: absolute;
+  left: 100px;
+  top: 40px;
+  color: white;
+  background-color: #6e96eb;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border-color: black;
+  border-width: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.active-sticky-background {
+  background-color: #d9d9d9;
+}
+
+.active-notes {
+  background-color: #fcecc9;
+}
+
+.active-radio {
+  background-color: #93b1a7;
+}
