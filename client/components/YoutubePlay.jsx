@@ -6,7 +6,6 @@ export default function YoutubeFunctionality({ videoId }) {
   const [isPlaying, setIsPlaying] = useState(false);
   const playerRef = useRef(null);
   const [volume, setVolume] = useState(30);
-  const [preMute, setPreMute] = useState(volume);
 
   const handleVolumeChange = (e) => {
     setVolume(e.target.value);
@@ -18,42 +17,20 @@ export default function YoutubeFunctionality({ videoId }) {
 
   function PlayPauseButton({ onClick, isPlaying }) {
     return (
-      <button onClick={onClick} className="play-pause">
-        {isPlaying ? <box-icon name='pause-circle' /> : <box-icon name='play-circle' />}
-      </button>
+      <div className='w-12 h-12 flex items-center justify-center bg-white rounded-full margin-bot-8'>
+        <button onClick={onClick} >
+          {isPlaying ? <i className="fa-solid fa-pause play-button" /> : <i className="fa-solid fa-play play-button" />}
+        </button>
+      </div>
     );
   }
-
-  function MuteButton({ onClick }) {
-    if (volume === 0) {
-      return (
-        <button onClick={onClick} className="mute" >
-          <box-icon name='volume-mute' />
-        </button >
-      );
-    } else {
-      return (
-        <button onClick={onClick} className="mute" >
-          <box-icon type='solid' name='volume-full' />
-        </button>
-      );
-    }
-  }
-
-  const handleMute = () => {
-    if (volume === 0) {
-      setVolume(preMute);
-    } else {
-      setPreMute(volume);
-      setVolume(0);
-    }
-  };
 
   useEffect(() => {
     if (playerRef.current) {
       if (isPlaying) {
         playerRef.current.playVideo();
         playerRef.current.setVolume(volume);
+
       } else {
         playerRef.current.pauseVideo();
       }
@@ -73,16 +50,17 @@ export default function YoutubeFunctionality({ videoId }) {
   };
 
   return (
-    <>
+    <div className='flex justify-center align-center items-center flex-col'>
       <PlayPauseButton
         onClick={handleTogglePlay}
         isPlaying={isPlaying} >
         {isPlaying ? 'Pause' : 'Play'}
       </PlayPauseButton>
-      <input type="range" min="0" max="100" value={volume} onChange={handleVolumeChange} />
-      <MuteButton
-        onClick={handleMute}
-        isPlaying={isPlaying} />
+      <div className='flex flex-row'>
+        <i className="fa-solid fa-volume-xmark" />
+        <input type="range" min="0" max="100" value={volume} onChange={handleVolumeChange} className="volume-slider" />
+        <i className="fa-solid fa-volume-high" />
+      </div>
 
       <YouTube
         opts={opts}
@@ -91,6 +69,6 @@ export default function YoutubeFunctionality({ videoId }) {
         onPause={() => setIsPlaying(false)}
         onReady={(event) => { playerRef.current = event.target; }}
       />
-    </>
+    </div>
   );
 }

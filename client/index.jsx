@@ -19,13 +19,10 @@ function App() {
   };
 
   const addStickyNote = () => {
-    // const newId = Date.now().toString();
+
     const noteId = uuidv4();
     const newStickyNote = { id: noteId, text: '' };
     setStickyList([...stickyList, newStickyNote]);
-
-    // ;
-
     // for button coloring
     setIsStickyActive(true);
     // localStorage.setItem('stickyNotes', JSON.stringify([...stickyList, newId]));

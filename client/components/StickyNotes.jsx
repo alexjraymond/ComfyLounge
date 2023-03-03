@@ -6,22 +6,35 @@ import { makeWidgetMovable } from '../functions/widgetMove';
 const StickyNotes = ({ note, removeStickyNote }) => {
   // a sticky note is {id: string, text: string}
   const widgetRef = useRef();
-  // const localNotes = localStorage.getItem('notes');
-  // const [text, setText] = useState(localStorage.getItem(`text-${id}`) || '');
-  // const [notes, setNotes] = useState(localNotes);
+
   const [text, setText] = useState(note.text);
 
   const handleWidgetMovement = makeWidgetMovable(widgetRef);
 
   const handleNoteChange = (e) => {
     const newText = e.target.value;
-    // localStorage.setItem(`text-${id}`, newText);
     setText(newText);
   };
 
   // useEffect(() => {
-  //   localStorage.setItem('notes', notes);
-  // }, [notes]);
+  //   // read existing data from data.json
+  //   const jsonData = JSON.parse(fs.readFileSync('data.json', 'utf8'));
+
+  //   // update the data for the current note
+  //   const updatedData = {
+  //     ...jsonData,
+  //     [note.id]: {
+  //       id: note.id,
+  //       text
+  //     }
+  //   };
+
+  //   // write the updated data to data.json
+  //   fs.writeFileSync('data.json', JSON.stringify(updatedData));
+
+  //   // save the updated data to localStorage
+  //   localStorage.setItem('note', JSON.stringify(text));
+  // }, [text, note.id]);
 
   return (
     <article

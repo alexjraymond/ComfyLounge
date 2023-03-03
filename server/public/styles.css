@@ -68,7 +68,13 @@ li {
 }
 
 .music-widget {
-  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: stretch;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
   border-radius: 16px;
   box-shadow: rgba(0, 0, 0, 0.247) 0 8px 24px;
 }
@@ -166,3 +172,152 @@ textarea:focus {
 .active-radio {
   background-color: #93b1a7;
 }
+
+.radio-button {
+  width: 150px;
+  height: 60px;
+  border-width: 0.2rem;
+  border-color: black;
+  border-radius: 8px;
+  margin: 2px 4px;
+  position: relative;
+  isolation: isolate;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+
+.lofi-girl::after {
+  content: "";
+  position: absolute;
+  background-size: cover;
+  inset: 0;
+  z-index: -1;
+  background-image: url("./img/lofigirl150.png");
+  opacity: 0.3;
+}
+
+.piano-guy::after {
+  content: "";
+  position: absolute;
+  background-size: cover;
+  inset: 0;
+  z-index: -1;
+  background-image: url("./img/pianoguy150.png");
+  opacity: 0.3;
+}
+
+input[type="radio"] {
+  display: none;
+}
+
+.raccoon::after {
+  content: "";
+  position: absolute;
+  background-size: cover;
+  inset: 0;
+  z-index: -1;
+  background-image: url("./img/racoon150.png");
+  opacity: 0.3;
+}
+
+.coffee-shop::after {
+  content: "";
+  position: absolute;
+  background-size: cover;
+  inset: 0;
+  z-index: -1;
+  background-image: url("./img/loficoffee150.png");
+  opacity: 0.3;
+}
+
+.option {
+  background: #fff;
+  height: 60px;
+  width: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 0 10px;
+  border: 2px solid #005949;
+  transition: all 0.3s ease;
+}
+
+.option:hover {
+  border: 0.5rem solid #005949;
+}
+
+input[type="range"] {
+  width: 10rem;
+  height: 1rem;
+  border-radius: 0.5rem;
+  appearance: none;
+  outline: none;
+  background: #f2f2f2;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  background-color: #f2f2f2;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #005949;
+  box-shadow: -300px 0 0 290px #005949;
+}
+
+.fa-volume-high,
+.fa-volume-xmark {
+  font-size: 16px;
+  margin: 0 10px;
+}
+
+.margin-bot-8 {
+  margin-bottom: 8px;
+}
+
+/* .option input[type="radio"]:hover + label {
+  background-color: #76cf9f;
+} */
+
+input[type="radio"][value="jfKfPfyJRdk"]:checked + label {
+  background-image: url("./img/lofigirl150.png");
+  border: none;
+  opacity: 1;
+  content: "";
+}
+
+input[type="radio"][value="5yx6BWlEVcY"]:checked + label {
+  background-image: url("./img/racoon150.png");
+  border: none;
+  opacity: 1;
+  content: "";
+}
+
+input[type="radio"][value="tfBVp0Zi2iE"]:checked + label {
+  background-image: url("./img/pianoguy150.png");
+  border: none;
+  opacity: 1;
+  content: "";
+}
+
+input[type="radio"][value="e3L1PIY1pN8"]:checked + label {
+  background-image: url("./img/loficoffee150.png");
+  border: none;
+  opacity: 1;
+  content: "";
+}
+
+/* .coffee-shop::after + label {
+  background-color: #6e96eb00;
+  content: "";
+  background-size: cover;
+  inset: 0;
+  background-image: url("./img/loficoffee150.png");
+  opacity: 1;
+} */

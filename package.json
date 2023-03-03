@@ -10,7 +10,7 @@
     "build": "NODE_ENV=production webpack",
     "db:import": "sh database/import.sh",
     "prepare": "husky install",
-    "twdev": "npx tailwindcss -i ./server/public/input.css -o ./server/public/output.css --watch"
+    "twdev": "npx tailwindcss -o ./server/public/output.css --watch"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.3",
