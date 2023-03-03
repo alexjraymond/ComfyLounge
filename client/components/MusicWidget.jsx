@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import YoutubeFunctionality from './YoutubePlay';
 import { makeWidgetMovable } from '../functions/widgetMove';
 
@@ -6,12 +6,26 @@ import { makeWidgetMovable } from '../functions/widgetMove';
 export default function MusicWidget() {
   const widgetRef = useRef(null);
   const [videoId, setVideoId] = useState('');
+  const widgetId = 'MusicWidget';
 
-  const handleWidgetMovement = makeWidgetMovable(widgetRef);
+  const handleWidgetMovement = makeWidgetMovable(widgetRef, widgetId);
 
   function handleVideoChange(newVideo) {
     setVideoId(newVideo);
   }
+
+  function loadWidgetPosition() {
+    const coords = JSON.parse(localStorage.getItem(`widgetCoords-${widgetId}`));
+    if (coords) {
+      widgetRef.current.style.position = 'absolute';
+      widgetRef.current.style.left = `${coords.x}px`;
+      widgetRef.current.style.top = `${coords.y}px`;
+    }
+  }
+
+  useEffect(() => {
+    loadWidgetPosition();
+  }, []);
 
   return (
     <div

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import reactDOM from 'react-dom/client';
 import MusicWidget from './components/MusicWidget';
 import StickyNotes from './components/StickyNotes';
@@ -10,13 +10,41 @@ const root = reactDOM.createRoot(container);
 
 function App() {
   const [isMusicWidgetVisible, setIsMusicWidgetVisible] = useState(false);
-  // const [nextId, setNextId] = useState(0);
-  const [stickyList, setStickyList] = useState([]);
+  const [stickyList, setStickyList] = useState(() => {
+    const storedStickyList = JSON.parse(localStorage.getItem('stickyList'));
+    return storedStickyList || [];
+  });
   const [isStickyActive, setIsStickyActive] = useState(false);
 
   const hideMusicWidget = () => {
     setIsMusicWidgetVisible(!isMusicWidgetVisible);
+    localStorage.setItem(`widgetVisible-${'MusicWidget'}`, JSON.stringify(!isMusicWidgetVisible));
+
   };
+
+  function loadMusicWidget() {
+    const visibility = JSON.parse(localStorage.getItem(`widgetVisible-${'MusicWidget'}`));
+    if (visibility) {
+      setIsMusicWidgetVisible(true);
+
+    }
+  }
+
+  useEffect(() => {
+    loadMusicWidget();
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('stickyList', JSON.stringify(stickyList));
+  }, [stickyList]);
+
+  useEffect(() => {
+    const storedStickyList = JSON.parse(localStorage.getItem('stickyList'));
+    if (storedStickyList && storedStickyList.length > 0) {
+      setStickyList(storedStickyList);
+      setIsStickyActive(true);
+    }
+  }, []);
 
   const addStickyNote = () => {
 
@@ -25,7 +53,7 @@ function App() {
     setStickyList([...stickyList, newStickyNote]);
     // for button coloring
     setIsStickyActive(true);
-    // localStorage.setItem('stickyNotes', JSON.stringify([...stickyList, newId]));
+
   };
 
   const removeStickyNote = (id) => {
@@ -37,16 +65,8 @@ function App() {
     if (updatedStickyList.length === 0) {
       setIsStickyActive(false);
     }
-    // localStorage.setItem(updatedStickyList);
-    // localStorage.removeItem(`text-${id}`);
-  };
 
-  // useEffect(() => {
-  //   const storedNotes = JSON.parse(localStorage.getItem('stickyNotes'));
-  //   if (storedNotes) {
-  //     setStickyList(storedNotes);
-  //   }
-  // }, []);
+  };
 
   return (
     <>
