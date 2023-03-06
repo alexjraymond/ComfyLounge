@@ -1,33 +1,83 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import logoBw from '../../server/public/img/logo_bw.png';
 import { makeWidgetMovable } from '../functions/widgetMove';
 
-const StickyNotes = () => {
+// Sticky Note Component that has the HTML and handles the textarea content
+const StickyNotes = ({ note, removeStickyNote }) => {
+  // a sticky note is {id: string, text: string}
   const widgetRef = useRef();
-  const localNotes = localStorage.getItem('notes');
-  const [notes, setNotes] = useState(localNotes);
+  const widgetId = `widgetCoords-${note.id}`;
 
-  const handleWidgetMovement = makeWidgetMovable(widgetRef);
+  const [text, setText] = useState(note.text);
+
+  const handleWidgetMovement = makeWidgetMovable(widgetRef, widgetId);
 
   const handleNoteChange = (e) => {
-    localStorage.setItem('notes', e.target.value);
-    setNotes(e.target.value);
+    const newText = e.target.value;
+    setText(newText);
+    localStorage.setItem(`widgetText-${widgetId}`, JSON.stringify(newText));
   };
+
+  useEffect(() => {
+    const storedText = JSON.parse(localStorage.getItem(`widgetText-${widgetId}`));
+    if (storedText) {
+      setText(storedText);
+    }
+  }, []);
+
+  function loadWidgetPosition() {
+    const coords = JSON.parse(localStorage.getItem(`widgetCoords-${widgetId}`));
+    if (coords) {
+      widgetRef.current.style.position = 'absolute';
+      widgetRef.current.style.left = `${coords.x}px`;
+      widgetRef.current.style.top = `${coords.y}px`;
+    }
+  }
+
+  useEffect(() => {
+    loadWidgetPosition();
+  }, []);
+
+  // useEffect(() => {
+  //   // read existing data from data.json
+  //   const jsonData = JSON.parse(fs.readFileSync('data.json', 'utf8'));
+
+  //   // update the data for the current note
+  //   const updatedData = {
+  //     ...jsonData,
+  //     [note.id]: {
+  //       id: note.id,
+  //       text
+  //     }
+  //   };
+
+  //   // write the updated data to data.json
+  //   fs.writeFileSync('data.json', JSON.stringify(updatedData));
+
+  //   // save the updated data to localStorage
+  //   localStorage.setItem('note', JSON.stringify(text));
+  // }, [text, note.id]);
 
   return (
     <article
       className="sticky-note"
       onMouseDown={handleWidgetMovement}
       ref={widgetRef}
+      id={note.id}
     >
       <nav className='sticky-nav'>
         <img src={logoBw} className="sticky-logo" />
-        <box-icon name='x' className="sticky-x" color='#f93943' />
+        <button
+          onClick={() => removeStickyNote(note.id)}
+        >
+          <box-icon name='x' className="sticky-x" color='#f93943'
+             />
+        </button>
       </nav>
       <article className="notes-article">
         <textarea
           placeholder="write note here..."
-          value={notes}
+          value={text}
           onChange={handleNoteChange}
         />
       </article>

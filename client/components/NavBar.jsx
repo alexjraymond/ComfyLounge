@@ -2,8 +2,9 @@ import React from 'react';
 import radioButton from '../../server/public/img/radbut1.png';
 import notesButton from '../../server/public/img/notesbutton.png';
 
+// entire Navigation Bar functionality
 export default function NavBar(props) {
-  const { hideMusicWidget, onNotesButtonClick } = props;
+  const { hideMusicWidget, onNotesButtonClick, stickyList, isStickyActive, isMusicWidgetVisible } = props;
 
   return (
     <header>
@@ -13,9 +14,12 @@ export default function NavBar(props) {
           className="flex">
           <RadioButton
             onClick={hideMusicWidget}
+            isMusicWidgetVisible={isMusicWidgetVisible}
           />
           <NotesButton
             onClick={onNotesButtonClick}
+            stickyList={stickyList}
+            isStickyActive={isStickyActive}
           />
         </ul>
         <Logo />
@@ -33,34 +37,48 @@ function Logo() {
   );
 }
 
-function NavButton({ label, onClick, src, alt }) {
+function NavButton({ label, onClick, src, alt, isStickyActive, isMusicWidgetVisible, componentName }) {
+  const conditionalClass = `nav-button${isStickyActive ? ' active-notes' : ''}${isMusicWidgetVisible ? ' active-radio' : ''} ${componentName}`;
   return (
     <li>
-      <button className="nav-button" onClick={onClick} label={label}>
-        <img src={src} alt={alt} />
+      <button
+        className={conditionalClass}
+        onClick={onClick}
+        label={label} >
+        <img
+          src={src}
+          alt={alt} />
       </button>
     </li>
   );
 }
 
-function RadioButton({ onClick }) {
+function RadioButton({ onClick, isMusicWidgetVisible }) {
   return (
     <NavButton
       label='radio'
       onClick={onClick}
       src={radioButton}
       alt="radio-icon"
+      isMusicWidgetVisible={isMusicWidgetVisible}
+      componentName="radio"
     />
   );
 }
 
-function NotesButton({ onClick }) {
+function NotesButton({ onClick, stickyList, isStickyActive }) {
   return (
-    <NavButton
+    <>
+      <NavButton
         label='notes'
         onClick={onClick}
         src={notesButton}
         alt="notes-icon"
-    />
+        isStickyActive={isStickyActive}
+        componentName="notes"
+      />
+      {stickyList.length > 0 && (<div className='sticky-count'>{stickyList.length}</div>)}
+
+    </>
   );
 }
