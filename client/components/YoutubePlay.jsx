@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
+// react-youtube package that creates a component layered over youtube's iframe api
 import YouTube from 'react-youtube';
 
 // Playing Youtube in the background for the Music Widget - Also adjusts volume and mute
@@ -49,6 +50,7 @@ export default function YoutubeFunctionality({ videoId }) {
     }
   };
 
+  // returns the play button, volume slider, and youtube component
   return (
     <div className='flex justify-center align-center items-center flex-col'>
       <PlayPauseButton

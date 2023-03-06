@@ -30,6 +30,7 @@ function App() {
     }
   }
 
+  // loads the visibility state of music widget from localstorage on refresh, if it exists
   useEffect(() => {
     loadMusicWidget();
   }, []);
@@ -44,6 +45,7 @@ function App() {
       setStickyList(storedStickyList);
       setIsStickyActive(true);
     }
+
   }, []);
 
   const addStickyNote = () => {

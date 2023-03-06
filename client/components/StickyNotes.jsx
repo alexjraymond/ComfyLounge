@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import logoBw from '../../server/public/img/logo_bw.png';
 import { makeWidgetMovable } from '../functions/widgetMove';
 
@@ -6,15 +6,37 @@ import { makeWidgetMovable } from '../functions/widgetMove';
 const StickyNotes = ({ note, removeStickyNote }) => {
   // a sticky note is {id: string, text: string}
   const widgetRef = useRef();
+  const widgetId = `widgetCoords-${note.id}`;
 
   const [text, setText] = useState(note.text);
 
-  const handleWidgetMovement = makeWidgetMovable(widgetRef);
+  const handleWidgetMovement = makeWidgetMovable(widgetRef, widgetId);
 
   const handleNoteChange = (e) => {
     const newText = e.target.value;
     setText(newText);
+    localStorage.setItem(`widgetText-${widgetId}`, JSON.stringify(newText));
   };
+
+  useEffect(() => {
+    const storedText = JSON.parse(localStorage.getItem(`widgetText-${widgetId}`));
+    if (storedText) {
+      setText(storedText);
+    }
+  }, []);
+
+  function loadWidgetPosition() {
+    const coords = JSON.parse(localStorage.getItem(`widgetCoords-${widgetId}`));
+    if (coords) {
+      widgetRef.current.style.position = 'absolute';
+      widgetRef.current.style.left = `${coords.x}px`;
+      widgetRef.current.style.top = `${coords.y}px`;
+    }
+  }
+
+  useEffect(() => {
+    loadWidgetPosition();
+  }, []);
 
   // useEffect(() => {
   //   // read existing data from data.json
