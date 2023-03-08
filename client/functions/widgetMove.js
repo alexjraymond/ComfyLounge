@@ -8,6 +8,7 @@ export function makeWidgetMovable(widgetRef, widgetId) {
     // Check if the event target is the widget
     if (e.target === widgetRef.current) {
       e.preventDefault();
+
       // Set the position of the widget to absolute
       widgetRef.current.style.position = 'absolute';
       // Calculate the distance between the mouse cursor and the top-left corner of the widget
