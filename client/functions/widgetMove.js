@@ -3,11 +3,26 @@
 // Function that returns an event handler function for making a widget movable
 export function makeWidgetMovable(widgetRef, widgetId) {
 
+  let maxZIndex = parseInt(localStorage.getItem('maxZIndex')) || 1;
+
+  // Define a variable to store the last selected widget
+
   // Event handler function that handles mouse events on the widget
   function widgetMovement(e) {
+
+    let lastSelectedWidget = null;
+
     // Check if the event target is the widget
     if (e.target === widgetRef.current) {
       e.preventDefault();
+
+      // Bring the last selected widget to the front
+      if (lastSelectedWidget !== widgetRef.current) {
+        lastSelectedWidget = widgetRef.current;
+        lastSelectedWidget.style.zIndex = maxZIndex + 1;
+        maxZIndex++;
+        localStorage.setItem('maxZIndex', maxZIndex);
+      }
 
       // Set the position of the widget to absolute
       widgetRef.current.style.position = 'absolute';

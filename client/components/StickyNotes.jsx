@@ -38,26 +38,6 @@ const StickyNotes = ({ note, removeStickyNote }) => {
     loadWidgetPosition();
   }, []);
 
-  // useEffect(() => {
-  //   // read existing data from data.json
-  //   const jsonData = JSON.parse(fs.readFileSync('data.json', 'utf8'));
-
-  //   // update the data for the current note
-  //   const updatedData = {
-  //     ...jsonData,
-  //     [note.id]: {
-  //       id: note.id,
-  //       text
-  //     }
-  //   };
-
-  //   // write the updated data to data.json
-  //   fs.writeFileSync('data.json', JSON.stringify(updatedData));
-
-  //   // save the updated data to localStorage
-  //   localStorage.setItem('note', JSON.stringify(text));
-  // }, [text, note.id]);
-
   return (
     <article
       className="sticky-note"

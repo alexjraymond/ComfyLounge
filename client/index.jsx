@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import reactDOM from 'react-dom/client';
 import MusicWidget from './components/MusicWidget';
 import StickyNotes from './components/StickyNotes';
+import KittenWidget from './components/KittenWidget';
 import NavBar from './components/NavBar';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -15,6 +16,13 @@ function App() {
     return storedStickyList || [];
   });
   const [isStickyActive, setIsStickyActive] = useState(false);
+  const [isKittenActive, setIsKittenActive] = useState(false);
+
+  const hideKittenWidget = () => {
+    setIsKittenActive(!isKittenActive);
+    localStorage.setItem(`widgetVisible-${'KittenWidget'}`, JSON.stringify(!isKittenActive));
+
+  };
 
   const hideMusicWidget = () => {
     setIsMusicWidgetVisible(!isMusicWidgetVisible);
@@ -30,9 +38,17 @@ function App() {
     }
   }
 
+  function loadKittenWidget() {
+    const visibility = JSON.parse(localStorage.getItem(`widgetVisible-${'KittenWidget'}`));
+    if (visibility) {
+      setIsKittenActive(true);
+    }
+  }
+
   // loads the visibility state of music widget from localstorage on refresh, if it exists
   useEffect(() => {
     loadMusicWidget();
+    loadKittenWidget();
   }, []);
 
   useEffect(() => {
@@ -78,10 +94,13 @@ function App() {
         stickyList={stickyList}
         isStickyActive={isStickyActive}
         isMusicWidgetVisible={isMusicWidgetVisible}
+        onKittenButtonClick={hideKittenWidget}
+        isKittenActive={isKittenActive}
       />
       <main>
         {isMusicWidgetVisible ? <MusicWidget /> : null }
         {stickyList.map((note) => (<StickyNotes note={note} key={note.id} removeStickyNote={removeStickyNote} />))}
+        {isKittenActive ? <KittenWidget /> : null}
       </main>
     </>
   );

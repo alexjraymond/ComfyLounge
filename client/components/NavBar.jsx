@@ -1,10 +1,19 @@
 import React from 'react';
 import radioButton from '../../server/public/img/radbut1.png';
 import notesButton from '../../server/public/img/notesbutton.png';
+import kittenButton from '../../server/public/img/kitten_centered_button.png';
 
 // entire Navigation Bar functionality
 export default function NavBar(props) {
-  const { hideMusicWidget, onNotesButtonClick, stickyList, isStickyActive, isMusicWidgetVisible } = props;
+  const {
+    hideMusicWidget,
+    onNotesButtonClick,
+    stickyList,
+    isStickyActive,
+    isMusicWidgetVisible,
+    onKittenButtonClick,
+    isKittenActive
+  } = props;
 
   return (
     <header>
@@ -20,6 +29,10 @@ export default function NavBar(props) {
             onClick={onNotesButtonClick}
             stickyList={stickyList}
             isStickyActive={isStickyActive}
+          />
+          <KittenButton
+            onClick={onKittenButtonClick}
+            isKittenActive={isKittenActive}
           />
         </ul>
         <Logo />
@@ -37,8 +50,17 @@ function Logo() {
   );
 }
 
-function NavButton({ label, onClick, src, alt, isStickyActive, isMusicWidgetVisible, componentName }) {
-  const conditionalClass = `nav-button${isStickyActive ? ' active-notes' : ''}${isMusicWidgetVisible ? ' active-radio' : ''} ${componentName}`;
+function NavButton({
+  label,
+  onClick,
+  src,
+  alt,
+  isStickyActive,
+  isMusicWidgetVisible,
+  componentName,
+  isKittenActive
+}) {
+  const conditionalClass = `nav-button${isStickyActive ? ' active-notes' : ''}${isMusicWidgetVisible ? ' active-radio' : ''} ${isKittenActive ? ' active-kitten' : ''} ${componentName}`;
   return (
     <li>
       <button
@@ -80,5 +102,18 @@ function NotesButton({ onClick, stickyList, isStickyActive }) {
       {stickyList.length > 0 && (<div className='sticky-count'>{stickyList.length}</div>)}
 
     </>
+  );
+}
+
+function KittenButton({ onClick, isKittenActive }) {
+  return (
+    <NavButton
+      label='kitten'
+      onClick={onClick}
+      src={kittenButton}
+      alt="kitten-icon"
+      isKittenActive={isKittenActive}
+      componentName="kitten"
+    />
   );
 }

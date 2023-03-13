@@ -94,6 +94,9 @@ label {
 }
 
 .sticky-note {
+  position: absolute;
+  left: 177px;
+  top: 11px;
   display: flex;
   flex-direction: column;
   width: 200px;
