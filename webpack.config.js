@@ -15,7 +15,11 @@ module.exports = {
     isDevelopment && 'webpack-hot-middleware/client?timeout=1000'
   ].filter(Boolean),
   resolve: {
-    extensions: ['.js', '.jsx']
+    extensions: ['.js', '.jsx'],
+    fallback: {
+      path: require.resolve('path-browserify'),
+      os: require.resolve('os-browserify/browser')
+    }
   },
   output: {
     path: serverPublicPath
@@ -61,6 +65,9 @@ module.exports = {
   },
   devtool: isDevelopment ? 'cheap-module-source-map' : 'source-map',
   plugins: [
+    new webpack.DefinePlugin({
+      process: { env: {} }
+    }),
     new webpack.EnvironmentPlugin([]),
     isDevelopment && new ReactRefreshWebpackPlugin(),
     isDevelopment && new webpack.NoEmitOnErrorsPlugin(),

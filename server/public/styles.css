@@ -94,6 +94,9 @@ label {
 }
 
 .sticky-note {
+  position: absolute;
+  left: 177px;
+  top: 11px;
   display: flex;
   flex-direction: column;
   width: 200px;
@@ -281,10 +284,6 @@ input[type="range"]::-webkit-slider-thumb {
   margin-bottom: 8px;
 }
 
-/* .option input[type="radio"]:hover + label {
-  background-color: #76cf9f;
-} */
-
 input[type="radio"][value="jfKfPfyJRdk"]:checked + label {
   background-image: url("./img/lofigirl150.png");
   border: none;
@@ -313,11 +312,45 @@ input[type="radio"][value="e3L1PIY1pN8"]:checked + label {
   content: "";
 }
 
-/* .coffee-shop::after + label {
-  background-color: #6e96eb00;
-  content: "";
-  background-size: cover;
-  inset: 0;
-  background-image: url("./img/loficoffee150.png");
-  opacity: 1;
-} */
+.kitten-widget {
+  width: 280px;
+  height: 300px;
+  background-color: #464646;
+  border-radius: 16px;
+  padding: 20px;
+  padding-top: 10px;
+  box-shadow: rgba(0, 0, 0, 0.247) 0 8px 24px;
+}
+
+.kitten-widget > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.refresh-div {
+  padding-top: 2px;
+  width: 100%;
+  color: #fad0c9;
+  font-size: 18px;
+  display: flex;
+  margin-left: 15px;
+  justify-content: flex-end;
+}
+
+.active-kitten {
+  background-color: #fad0c9;
+}
+
+.cat-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.cat-container {
+  height: 260px;
+  max-width: 215px;
+}
