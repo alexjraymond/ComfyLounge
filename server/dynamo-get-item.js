@@ -1,17 +1,20 @@
-import AWS from 'aws-sdk';
+const AWS = require('aws-sdk');
+
+// make an endpoint
+//
 
 // Set the region and credentials for AWS SDK
 AWS.config.update({
   region: 'us-east-2',
-  accessKeyId: process.env.ACCESS_KEY,
-  secretAccessKey: process.env.SECRET_ACCESS_KEY
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
 });
 
 // Create a new DynamoDB instance
 const dynamoDB = new AWS.DynamoDB();
 
 // Call the getItem() method with the parameters and handle the response
-export default async function getCatData() {
+module.exports.getCatData = async function () {
 
   // random # generator for what to get from DB
   const random = (min, max) => {
@@ -33,4 +36,4 @@ export default async function getCatData() {
   } catch (error) {
     console.error(error);
   }
-}
+};
