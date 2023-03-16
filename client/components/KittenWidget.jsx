@@ -1,21 +1,20 @@
 import React, { useRef, useState } from 'react';
 import { makeWidgetMovable } from '../functions/widgetMove';
-import getCatData from '../../server/dynamo-get-item';
 
 export default function KittenWidget() {
+
+  const handleCats = () => {
+    fetch('/api/cats')
+      .then((res) => res.json())
+      .then((imgurl) => { setCatUrl(imgurl.imgUrl); })
+      .catch((error) => console.error(error));
+  };
+
   const widgetRef = useRef(null);
   const widgetId = 'KittenWidget';
   const [catUrl, setCatUrl] = useState('');
-  // const [isLoading, setIsLoading] = (false);
 
-  async function fetchCatData() {
-    try {
-      const imgUrl = await getCatData();
-      setCatUrl(imgUrl);
-    } catch (error) {
-      console.error(error);
-    }
-  }
+  // const [isLoading, setIsLoading] = (false);
 
   const handleWidgetMovement = makeWidgetMovable(widgetRef, widgetId);
 
@@ -37,13 +36,13 @@ export default function KittenWidget() {
             />
               )
             : (
-              <span>Hold on...</span>
+              <span>Click the Button!</span>
               )}
         </div>
         <div className='refresh-div'>
           <button
             className='flex'
-            onClick={fetchCatData}
+            onClick={handleCats}
           >
             <i className="fa-solid fa-arrows-rotate" />
           </button>
