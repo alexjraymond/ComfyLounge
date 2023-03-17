@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { makeWidgetMovable } from '../functions/widgetMove';
+import Draggable from 'react-draggable';
 
 export default function KittenWidget() {
 
@@ -11,44 +11,41 @@ export default function KittenWidget() {
   };
 
   const widgetRef = useRef(null);
-  const widgetId = 'KittenWidget';
   const [catUrl, setCatUrl] = useState('');
 
-  // const [isLoading, setIsLoading] = (false);
-
-  const handleWidgetMovement = makeWidgetMovable(widgetRef, widgetId);
-
   return (
-
-    <article
-      onMouseDown={handleWidgetMovement}
-      className='kitten-widget'
-      // onMouseDown={handleWidgetMovement}
-      ref={widgetRef}
+    <Draggable
+      handle=".kitten"
+      bounds="body"
     >
-      <div>
-        <div className='cat-container'>
-          {catUrl
-            ? (
-              <img
+      <article
+        className='kitten-widget'
+      ref={widgetRef}
+      >
+        <i className="fa-solid fa-grip-lines kitten drag-color" />
+        <div>
+          <div className='cat-container'>
+            {catUrl
+              ? (
+                <img
               src={catUrl}
               className='cat-img'
             />
-              )
-            : (
-              <span>Click the Button!</span>
-              )}
-        </div>
-        <div className='refresh-div'>
-          <button
+                )
+              : (
+                <span>Click the Button!</span>
+                )}
+          </div>
+          <div className='refresh-div'>
+            <button
             className='flex'
             onClick={handleCats}
           >
-            <i className="fa-solid fa-arrows-rotate" />
-          </button>
+              <i className="fa-solid fa-arrows-rotate" />
+            </button>
+          </div>
         </div>
-      </div>
-    </article>
-
+      </article>
+    </Draggable>
   );
 }
