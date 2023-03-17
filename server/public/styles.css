@@ -39,21 +39,16 @@ li > button > img {
   font-size: 14px;
 }
 
-body {
-  /* background-image: url("./img/PastelHourDesktop.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed; */
-
-  /* background-color: #453f3c; */
-}
-
 .kitten-active {
   background-color: #fad0c9;
 }
 
 .hidden {
   display: none;
+}
+
+body {
+  height: 100vh;
 }
 
 li {
@@ -351,6 +346,10 @@ input[type="radio"][value="e3L1PIY1pN8"]:checked + label {
 }
 
 .cat-container {
-  height: 260px;
+  height: 240px;
   max-width: 215px;
+}
+
+.drag-color {
+  color: #fad1c9;
 }

@@ -33,7 +33,7 @@ export default function MusicWidget() {
       className="music-widget"
       ref={widgetRef}
       style={{ width: '400px', height: '260px', background: '#93B1A7' }}
-      // onMouseDown={handleWidgetMovement}
+
     >
 
       <YoutubeForm videoId={videoId} onVideoChange={handleVideoChange} />

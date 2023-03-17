@@ -17,6 +17,8 @@ function App() {
   });
   const [isStickyActive, setIsStickyActive] = useState(false);
   const [isKittenActive, setIsKittenActive] = useState(false);
+  // const zIndexRef = useRef(0);
+  // const lastDraggedRef = useRef(null);
 
   const hideKittenWidget = () => {
     setIsKittenActive(!isKittenActive);
@@ -98,9 +100,12 @@ function App() {
         isKittenActive={isKittenActive}
       />
       <main>
-        {isMusicWidgetVisible ? <MusicWidget /> : null }
+
+        {isMusicWidgetVisible ? <MusicWidget /> : null}
+
         {stickyList.map((note) => (<StickyNotes note={note} key={note.id} removeStickyNote={removeStickyNote} />))}
         {isKittenActive ? <KittenWidget /> : null}
+
       </main>
     </>
   );
