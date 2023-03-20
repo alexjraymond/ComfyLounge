@@ -352,4 +352,6 @@ input[type="radio"][value="e3L1PIY1pN8"]:checked + label {
 
 .drag-color {
   color: #fad1c9;
+  position: relative;
+  top: -2px;
 }

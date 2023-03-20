@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import Draggable from 'react-draggable';
 
 export default function KittenWidget() {
@@ -12,40 +12,81 @@ export default function KittenWidget() {
 
   const widgetRef = useRef(null);
   const [catUrl, setCatUrl] = useState('');
+  const [hasLoaded, setHasLoaded] = useState(false);
+  const [positions, setPositions] = useState({});
 
-  return (
-    <Draggable
+  useEffect(() => {
+    const existingDivPositions = JSON.parse(
+      localStorage.getItem('kitten-container')
+    );
+    setPositions(existingDivPositions);
+    setHasLoaded(true);
+
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('kitten-container', JSON.stringify(positions));
+
+  }, [positions]);
+
+  function handleStop(e, data) {
+    const dummyPositions = { ...positions };
+    const itemId = e.target.id;
+    dummyPositions[itemId] = {};
+    dummyPositions[itemId].x = data.x;
+    dummyPositions[itemId].y = data.y;
+    setPositions(dummyPositions);
+  }
+
+  return hasLoaded
+    ? (
+      <Draggable
       handle=".kitten"
-      bounds="body"
+        bounds="body"
+          defaultPosition={
+            positions === null
+              ? { x: 0, y: 0 }
+              : !positions
+                  ? { x: 0, y: 0 }
+                  : { x: positions['kitten-container'].x, y: positions['kitten-container'].y }
+          }
+          position={null}
+          nodeRef={widgetRef}
+          onStop={handleStop}
+
     >
-      <article
-        className='kitten-widget'
-      ref={widgetRef}
+        <article
+          className='kitten-widget'
+            ref={widgetRef}
       >
-        <i className="fa-solid fa-grip-lines kitten drag-color" />
-        <div>
-          <div className='cat-container'>
-            {catUrl
-              ? (
-                <img
+          <i
+              className="fa-solid fa-grip-lines kitten drag-color"
+              id='kitten-container'
+        />
+          <div>
+            <div className='cat-container'>
+              {catUrl
+                ? (
+                  <img
               src={catUrl}
               className='cat-img'
             />
-                )
-              : (
-                <span>Click the Button!</span>
-                )}
-          </div>
-          <div className='refresh-div'>
-            <button
+                  )
+                : (
+                  <span>Click the Button!</span>
+                  )}
+            </div>
+            <div className='refresh-div'>
+              <button
             className='flex'
             onClick={handleCats}
           >
-              <i className="fa-solid fa-arrows-rotate" />
-            </button>
+                <i className="fa-solid fa-arrows-rotate" />
+              </button>
+            </div>
           </div>
-        </div>
-      </article>
-    </Draggable>
-  );
+        </article>
+      </Draggable >
+      )
+    : null;
 }
