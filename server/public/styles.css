@@ -346,12 +346,20 @@ input[type="radio"][value="e3L1PIY1pN8"]:checked + label {
 }
 
 .cat-container {
-  height: 240px;
+  height: 260px;
   max-width: 215px;
 }
 
 .drag-color {
   color: #fad1c9;
-  position: relative;
-  top: -2px;
+  position: absolute;
+  top: 10px;
+}
+
+.music-anchor {
+  color: #005949;
+  position: absolute;
+  font-size: 20px;
+  left: 20px;
+  top: 10px;
 }

@@ -1,7 +1,9 @@
 import React, { useRef, useState, useEffect } from 'react';
 import Draggable from 'react-draggable';
 
-export default function KittenWidget() {
+export default function KittenWidget({ draggableHandleId }) {
+
+  draggableHandleId = 'kitten-container';
 
   const handleCats = () => {
     fetch('/api/cats')
@@ -52,16 +54,17 @@ export default function KittenWidget() {
           }
           position={null}
           nodeRef={widgetRef}
-          onStop={handleStop}
-
+        onStop={handleStop}
+        draggableHandleId='kitten-container'
     >
         <article
-          className='kitten-widget'
+          className='kitten-widget absolute'
             ref={widgetRef}
       >
           <i
               className="fa-solid fa-grip-lines kitten drag-color"
-              id='kitten-container'
+            id={draggableHandleId}
+
         />
           <div>
             <div className='cat-container'>
