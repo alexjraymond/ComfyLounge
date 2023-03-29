@@ -48,13 +48,6 @@ DynamoDB
 
 It is simple!  Open the link, and play around.  The widgets are movable, and the positions and text are saved in localstorage.  
 
-## Roadmap
-
-See the [open issues](https://github.com/alexjraymond/ComfyLounge/issues) for a list of proposed features (and known issues).
-
-### Creating A Pull Request
-
-
 
 ## License
 
@@ -63,9 +56,3 @@ Distributed under the MIT License. See [LICENSE](https://github.com/alexjraymond
 ## Authors
 
 * **Alex Raymond** - *Full-Stack Developer* - [Alex Raymond](https://github.com/alexjraymond) - **
-
-## Acknowledgements
-
-* []()
-* []()
-* []()
