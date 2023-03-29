@@ -17,8 +17,6 @@ function App() {
   });
   const [isStickyActive, setIsStickyActive] = useState(false);
   const [isKittenActive, setIsKittenActive] = useState(false);
-  // const zIndexRef = useRef(0);
-  // const lastDraggedRef = useRef(null);
 
   const hideKittenWidget = () => {
     setIsKittenActive(!isKittenActive);

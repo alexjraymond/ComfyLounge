@@ -1,49 +1,83 @@
 import React, { useRef, useState, useEffect } from 'react';
 import YoutubeFunctionality from './YoutubePlay';
-import { makeWidgetMovable } from '../functions/widgetMove';
+import Draggable from 'react-draggable';
 
 // Music Widget - holds the form and takes in YoutubePlay component
-export default function MusicWidget() {
+export default function MusicWidget(draggableHandleClassName) {
   const widgetRef = useRef(null);
   const [videoId, setVideoId] = useState('');
-  const widgetId = 'MusicWidget';
-
-  const handleWidgetMovement = makeWidgetMovable(widgetRef, widgetId);
+  const [isPositionLoaded, setIsPositionLoaded] = useState(false);
 
   function handleVideoChange(newVideo) {
     setVideoId(newVideo);
   }
 
-  function loadWidgetPosition() {
-    const coords = JSON.parse(localStorage.getItem(`widgetCoords-${widgetId}`));
-    if (coords) {
-      widgetRef.current.style.position = 'absolute';
-      widgetRef.current.style.left = `${coords.x}px`;
-      widgetRef.current.style.top = `${coords.y}px`;
-    }
-  }
+  const [positions, setPositions] = useState({});
 
   useEffect(() => {
-    loadWidgetPosition();
+    const existingDivPositions = JSON.parse(
+      localStorage.getItem('music-container')
+    );
+    setPositions(existingDivPositions);
+    setIsPositionLoaded(true);
   }, []);
 
+  useEffect(() => {
+    localStorage.setItem('music-container', JSON.stringify(positions));
+
+  }, [positions]);
+
+  function handleStop(e, data) {
+    const dummyPositions = { ...positions };
+    const itemId = 'music-container';
+    dummyPositions[itemId] = {};
+    dummyPositions[itemId].x = data.x;
+    dummyPositions[itemId].y = data.y;
+    setPositions(dummyPositions);
+  }
+
   return (
-    <div
-      onMouseDown={handleWidgetMovement}
-      className="music-widget"
+
+    isPositionLoaded && (
+
+    <Draggable
+      handle=".music"
+      bounds="body"
+      defaultPosition={
+        positions === null
+          ? { x: 0, y: 0 }
+          : !positions
+              ? { x: 0, y: 0 }
+              : positions['music-container']
+                ? { x: positions['music-container'].x, y: positions['music-container'].y }
+                : { x: 0, y: 0 }
+      }
+      position={null}
+      nodeRef={widgetRef}
+      onStop={handleStop}
+    >
+      <div
+      className="music-widget absolute"
       ref={widgetRef}
       style={{ width: '400px', height: '260px', background: '#93B1A7' }}
+      id='music-container'
+        >
+        <i
+        className={`fa-solid fa-grip-lines music-anchor music drag-color ${draggableHandleClassName.draggableHandleClassName}`}
+        id='music-container'
+          />
 
-    >
+        <YoutubeForm videoId={videoId} onVideoChange={handleVideoChange} />
 
-      <YoutubeForm videoId={videoId} onVideoChange={handleVideoChange} />
-
-      <YoutubeFunctionality
+        <YoutubeFunctionality
         videoId={videoId}
       />
 
-    </div>
-  );
+      </div>
+      </Draggable>
+    )
+  )
+  ;
 }
 
 function YoutubeForm(props) {
