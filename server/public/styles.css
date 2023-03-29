@@ -348,6 +348,7 @@ input[type="radio"][value="e3L1PIY1pN8"]:checked + label {
 .cat-container {
   height: 260px;
   max-width: 215px;
+  padding: 5px;
 }
 
 .drag-color {
@@ -362,4 +363,15 @@ input[type="radio"][value="e3L1PIY1pN8"]:checked + label {
   font-size: 20px;
   left: 20px;
   top: 10px;
+}
+
+.sticky-drag {
+  padding-bottom: 10px;
+}
+
+.click-button {
+  display: flex;
+  color: #fad0c9;
+  height: 100%;
+  margin-top: 75%;
 }

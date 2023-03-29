@@ -76,7 +76,7 @@ export default function KittenWidget({ draggableHandleId }) {
             />
                   )
                 : (
-                  <span>Click the Button!</span>
+                  <span className='click-button'>Click the Button!</span>
                   )}
             </div>
             <div className='refresh-div'>
