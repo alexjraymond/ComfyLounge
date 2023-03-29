@@ -12,8 +12,6 @@ export default function MusicWidget(draggableHandleClassName) {
     setVideoId(newVideo);
   }
 
-  // console.log(draggableHandleClassName);
-
   const [positions, setPositions] = useState({});
 
   useEffect(() => {

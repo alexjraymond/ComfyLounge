@@ -1,6 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
 import logoBw from '../../server/public/img/logo_bw.png';
-import { makeWidgetMovable } from '../functions/widgetMove';
 import Draggable from 'react-draggable';
 
 // Sticky Note Component that has the HTML and handles the textarea content
@@ -11,7 +10,6 @@ const StickyNotes = ({ note, removeStickyNote }) => {
 
   const [text, setText] = useState(note.text);
 
-  const handleWidgetMovement = makeWidgetMovable(widgetRef, widgetId);
   const [isPositionLoaded, setIsPositionLoaded] = useState(false);
 
   const handleNoteChange = (e) => {
@@ -26,34 +24,6 @@ const StickyNotes = ({ note, removeStickyNote }) => {
       setText(storedText);
     }
   }, []);
-
-  // function loadWidgetPosition() {
-  //   const coords = JSON.parse(localStorage.getItem(`widgetCoords-${widgetId}`));
-  //   if (coords) {
-  //     widgetRef.current.style.position = 'absolute';
-  //     widgetRef.current.style.left = `${coords.x}px`;
-  //     widgetRef.current.style.top = `${coords.y}px`;
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   loadWidgetPosition();
-  // }, []);
-
-  // const [positions, setPositions] = useState({});
-
-  // useEffect(() => {
-  //   const existingDivPositions = JSON.parse(
-  //     localStorage.getItem(widgetId)
-  //   );
-  //   setPositions(existingDivPositions);
-  //   setIsPositionLoaded(true);
-  // }, []);
-
-  // useEffect(() => {
-  //   localStorage.setItem(widgetId, JSON.stringify(positions));
-
-  // }, [positions]);
 
   const [positions, setPositions] = useState({});
 
@@ -70,7 +40,6 @@ const StickyNotes = ({ note, removeStickyNote }) => {
   }, [positions]);
 
   function handleStop(e, data) {
-    // const itemId = widgetId;
     const newPosition = { x: data.x, y: data.y };
     localStorage.setItem(`widgetCoords-${widgetId}`, JSON.stringify(newPosition));
   }
@@ -91,7 +60,7 @@ const StickyNotes = ({ note, removeStickyNote }) => {
     >
       <article
       className="sticky-note"
-      onMouseDown={handleWidgetMovement}
+
       ref={widgetRef}
       id={note.id}
     >

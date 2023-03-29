@@ -4,10 +4,6 @@ const staticMiddleware = require('./static-middleware');
 const errorMiddleware = require('./error-middleware');
 const getCatData = require('./dynamo-get-item');
 
-// console.log(process.env.AWS_ACCESS_KEY_ID);
-
-// make an endpoint that calls dynamoget getCatData
-
 const app = express();
 
 app.use(staticMiddleware);

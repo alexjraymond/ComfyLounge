@@ -5,13 +5,9 @@ import StickyNotes from './components/StickyNotes';
 import KittenWidget from './components/KittenWidget';
 import NavBar from './components/NavBar';
 import { v4 as uuidv4 } from 'uuid';
-// import withDraggable from './components/withDraggableHOC';
 
 const container = document.querySelector('#root');
 const root = reactDOM.createRoot(container);
-// const DraggableKittenWidget = withDraggable(KittenWidget);
-// const DraggableMusicWidget = withDraggable(MusicWidget);
-// const DraggableStickyNotes = withDraggable(StickyNotes);
 
 function App() {
   const [isMusicWidgetVisible, setIsMusicWidgetVisible] = useState(false);
@@ -21,8 +17,6 @@ function App() {
   });
   const [isStickyActive, setIsStickyActive] = useState(false);
   const [isKittenActive, setIsKittenActive] = useState(false);
-  // const zIndexRef = useRef(0);
-  // const lastDraggedRef = useRef(null);
 
   const hideKittenWidget = () => {
     setIsKittenActive(!isKittenActive);
